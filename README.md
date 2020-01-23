@@ -1,6 +1,10 @@
 # rails_template
-* 参考：[rails6\_template/app\_template\.rb at master · Iwark/rails6\_template](https://github.com/Iwark/rails6_template/blob/master/app_template.rb)
 
+## Ref
+* [Rails アプリケーションのテンプレート \- Railsガイド](https://railsguides.jp/rails_application_templates.html)
+* [rails6\_template/app\_template\.rb at master · Iwark/rails6\_template](https://github.com/Iwark/rails6_template/blob/master/app_template.rb)
+* [Rails new でいつもの準備を済ませる \- Qiita](https://qiita.com/gouf/items/8ecdb1c6fd88935e1808)
+* [after_bundle Rails::Generators::Actions](https://api.rubyonrails.org/v5.1/classes/Rails/Generators/Actions.html#method-i-after_bundle)
 ## Usage
 
 ```console

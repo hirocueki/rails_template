@@ -58,32 +58,46 @@ gem_group :test do
 end
 
 
+# install gems
+run 'bundle install --path vendor/bundle --jobs=4'
+
+
 # 
 after_bundle do
+  # webpacker install
+  run 'bin/rails webpacker:install'
+
+  # set config/application.rb
+  application  do
+    %q{
+      # Set timezone
+      config.time_zone = 'Tokyo'
+      config.active_record.default_timezone = :local
+      # 日本語化
+      I18n.available_locales = [:en, :ja]
+      I18n.enforce_available_locales = true
+      config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+      config.i18n.default_locale = :ja
+      # generatorの設定
+      config.generators do |g|
+        g.test_framework  :rspec, :fixture => true
+        g.view_specs false
+        g.controller_specs false
+        g.routing_specs false
+        g.helper_specs false
+        g.request_specs false
+        g.assets false
+        g.helper false
+      end
+    }
+  end
 
   # Devise
   generate 'devise:install'
-  get_remote('config/locales/devise.en.yml')
   get_remote('config/locales/devise.ja.yml')
 
-  rails "db:create db:migrate"
+  run "bin/rails db:create db:migrate"
+  
   git add: '.'
   git commit: "-am 'migrate database'"
-  
-  puts <<-CODE
-    # ADD TO config/application.rb
-    config.time_zone = 'Tokyo'
-
-    config.i18n.default_locale = :ja
-
-    config.generators do |g|
-      g.factory_bot false
-      g.factory_bot dir: 'spec/factories'
-
-      g.test_framework :rspec,
-        view_specs: false,
-        helper_spec: false,
-        routing_specs: false
-    end
-  CODE
 end

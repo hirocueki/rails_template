@@ -78,11 +78,13 @@ after_bundle do
       # Set timezone
       config.time_zone = 'Tokyo'
       config.active_record.default_timezone = :local
+
       # 日本語化
-      I18n.available_locales = [:en, :ja]
+      I18n.available_locales = [:ja]
       I18n.enforce_available_locales = true
       config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
       config.i18n.default_locale = :ja
+
       # generatorの設定
       config.generators do |g|
         g.test_framework  :rspec, :fixture => true

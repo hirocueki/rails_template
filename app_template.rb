@@ -105,6 +105,8 @@ after_bundle do
 
   # RSpec
   generate 'rspec:install'
+  # generate bin/rspec
+  run "bundle binstubs rspec-core"
 
   run "bin/rails db:create db:migrate"
 

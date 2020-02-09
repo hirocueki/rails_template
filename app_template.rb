@@ -67,7 +67,7 @@ end
 run 'bundle install --path vendor/bundle --jobs=4'
 
 
-# 
+#
 after_bundle do
   # webpacker install
   run 'bin/rails webpacker:install'
@@ -101,8 +101,11 @@ after_bundle do
   generate 'devise:install'
   get_remote('config/locales/devise.ja.yml')
 
+  # RSpec
+  generate 'rspec:install'
+
   run "bin/rails db:create db:migrate"
-  
+
   git add: '.'
   git commit: "-am 'migrate database'"
 end
